@@ -1,14 +1,45 @@
 import { useState } from 'react';
 import './App.css';
-import { Router } from 'react-router-dom';
-import SideDrawer from './components/Drawer';
+import Dashboard from './pages/Dashboard';
+import Summary from './pages/Summary';
+import Checkout from './pages/Checkout';
+import Navbar from './components/Navbar';
+import CustomDrawer from './components/Drawer';
+import CheckoutPanel from './components/CheckoutPanel';
 
-function App() {
-  return (
+const App = ({ view }) => {
+  let content;
+
+  //change the component based on the view prop
+  switch (view) {
+    case 'dashboard':
+      content = <Dashboard />;
+      break;
+    case 'summary':
+      content = <Summary/>;
+      break;
+    case 'checkout':
+      content = <Checkout />;
+      break;
+    case 'transactions':
+      content = <Checkout />;
+      break;
+    case 'help':
+      content = <Checkout />;
+          break;
+    default:
+      content = <Dashboard />;
+  }
+
+  return(
     <div>
-    
+      <Navbar />
+      <CustomDrawer />
+      {content}
+      <CheckoutPanel />
     </div>
-  );
-}
+  )
+};
+
 
 export default App;

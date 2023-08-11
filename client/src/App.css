@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.calibrate-layout {
+  display: flex;
+  flex-direction: column;
+  margin-left: calc(1.5% + 285px); 
+  height: 100vh;
+  margin-top: 5%;
+  background-color: bisque;
+  margin-right: 340px;
+}

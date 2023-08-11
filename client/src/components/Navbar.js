@@ -21,7 +21,7 @@ const Navbar = () => {
       };
     
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" style={{ zIndex: 1300, backgroundColor: "white", boxShadow:"3.5%" }} >
       <Toolbar>
         <Typography variant="h6" component={Link} to="/" sx={{ flexGrow: 1, textDecoration: 'none'  }}>
           LibraryPlus
@@ -36,7 +36,7 @@ const Navbar = () => {
               inputProps={{ 'aria-label': 'search' }}
               value={search} // Set the value of the input to the search state
               onChange={handleSearch} // Call the handleSearch function on input change
-              sx={{ ml: 1, color: 'inherit', width: '400px' }}
+              sx={{ ml: 1, color: 'black', width: '500px' }}
             />
           </div>
         </form>
