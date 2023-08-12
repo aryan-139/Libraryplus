@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CustomCard from '../components/DashboardCard'
 import BookCard from '../components/BookCard';
 import { useCart } from '../states/CardContext';
@@ -12,18 +12,34 @@ const Dashboard = () => {
           { text: 'Average Return Days', value: '29' },
           { text: 'Total Books Lended', value: '5' },
         ];
-        const booksData = [
-            { book: 'The Alchemist', author: 'Paulo Coelho', isbn: '978-0062315007' },
-            { book: 'To Kill a Mockingbird', author: 'Harper Lee', isbn: '978-0061120084' },
-            { book: '1984', author: 'George Orwell', isbn: '978-0451524935' },
-            { book: 'The Great Gatsby', author: 'F. Scott Fitzgerald', isbn: '978-0743273565' },
-            { book: 'Pride and Prejudice', author: 'Jane Austen', isbn: '978-0486284736' },
-            { book: 'The Catcher in the Rye', author: 'J.D. Salinger', isbn: '978-0316769488' },
-            { book: 'To Kill a Mockingbird', author: 'Harper Lee', isbn: '978-0061120084' },
-            { book: 'Brave New World', author: 'Aldous Huxley', isbn: '978-0060850524' },
-          ];
+        
   const { selectedBooks } = useCart();
-  console.log(selectedBooks);
+  //console.log(selectedBooks);
+
+  const [booksData, setBooksData] = React.useState([]); // State to hold the fetched books data
+
+  
+
+  useEffect(() => {
+    async function fetchBooks() {
+      try {
+        const response = await fetch('http://localhost:8001/books'); // Replace with your API endpoint
+        if (response.ok) {
+          const data = await response.json();
+          setBooksData(data);
+          //console.log(data);
+        } else {
+          console.error('Failed to fetch books data');
+        }
+      } catch (error) {
+        console.error('Error while fetching books:', error);
+      }
+    }
+
+    fetchBooks();
+  }, []);
+
+  console.log(booksData);
   
 
   return (
@@ -45,12 +61,24 @@ const Dashboard = () => {
     <br />
 
     <Box
-        sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0px', flexWrap: 'wrap' }}
-        >
-        {booksData.map((book, index) => (
-            <BookCard key={index} book={book.book} author={book.author} isbn={book.isbn} />
-        ))}
-        </Box>
+  sx={{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '0px',
+    flexWrap: 'wrap',
+  }}
+>
+{Array.isArray(booksData.message) && booksData.message.map((book, index) => (
+    <BookCard
+      key={index}
+      book={book.title}
+      author={book.authors}
+      isbn={book.isbn}
+    />
+  ))}
+
+</Box>
     
     </div>
   )

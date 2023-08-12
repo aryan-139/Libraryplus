@@ -27,7 +27,7 @@ const BookCard = ({ book, author, isbn }) => {
         borderRadius: '12px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
         width: "21%", // Set a fixed width for each card
-        height: "43%", // Set a fixed height for each card
+        height: "18%", // Set a fixed height for each card
         maxWidth: 300,
         margin: '20px',
         textAlign: 'center',
