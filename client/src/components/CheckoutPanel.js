@@ -21,19 +21,28 @@ const RightAlignedDrawer = styled(Drawer)(({ theme }) => ({
 
 const CheckoutPanel = () => {
   const { selectedBooks, removeFromCart } = useCart();
+  const [message, setMessage]=useState('');
   const navigate=useNavigate();
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const updateItemList = () => {
     return selectedBooks.length + ' ' + 'Items';
   };
-
+  let tempMessage='';
   //handle what happens when you submit the order 
   const handleSubmitOrder = () => {
     let currentOrdersLength=selectedBooks.length;
     if(currentOrdersLength===0){
      setIsErrorModalOpen(true);
+     tempMessage='Please select some books to checkout';
+     setMessage(tempMessage);
      //error handling using the modal 
-    } else{
+    }
+    else if(currentOrdersLength>5){
+      setIsErrorModalOpen(true);
+      tempMessage='You can only checkout a maximum of 5 books at a time, please remove some books from your cart';
+      setMessage(tempMessage);
+    }
+    else{
       navigate('/checkout');
     }
   };
@@ -92,7 +101,11 @@ const CheckoutPanel = () => {
       >
       Submit Order
       </Button>
-      <ErrorModal open={isErrorModalOpen} onClose={handleCloseErrorModal} message="Please select some books to checkout" />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <ErrorModal open={isErrorModalOpen} onClose={handleCloseErrorModal} message={message} />
     </RightAlignedDrawer>
   );
 };
