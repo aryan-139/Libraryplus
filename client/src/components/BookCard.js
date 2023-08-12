@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import BookIcon from '@mui/icons-material/Book';
 import Button from '@mui/material/Button';
+import { useCart } from '../states/CardContext';
 
 const BookCard = ({ book, author, isbn }) => {
   const MAX_TEXT_LENGTH = 30; // Maximum text length before truncating
@@ -16,14 +17,17 @@ const BookCard = ({ book, author, isbn }) => {
     return text;
   };
 
+  const { selectedBooks, addToCart, removeFromCart } = useCart();
+  const isInCart=selectedBooks.some((selectedBook) => selectedBook.isbn === isbn);
+
   return (
     <Card
       sx={{
         border: '1px solid #28358C',
         borderRadius: '12px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-        width: 280, // Set a fixed width for each card
-        height: 250, // Set a fixed height for each card
+        width: "21%", // Set a fixed width for each card
+        height: "43%", // Set a fixed height for each card
         maxWidth: 300,
         margin: '20px',
         textAlign: 'center',
@@ -42,10 +46,12 @@ const BookCard = ({ book, author, isbn }) => {
         <Button
           variant="contained"
           sx={{ backgroundColor: '#28358C', color: 'white', marginTop: '10px' }}
+          onClick={() => addToCart({ book, author, isbn })}
         >
           Add to Cart
         </Button>
       </CardContent>
+
     </Card>
   );
 };

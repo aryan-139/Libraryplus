@@ -2,6 +2,7 @@ import { Box, Button, Divider, Typography } from '@mui/material'
 import React from 'react'
 import CustomCard from '../components/DashboardCard'
 import BookCard from '../components/BookCard';
+import { useCart } from '../states/CardContext';
 
 const Dashboard = () => {
   const cardsData = [
@@ -21,7 +22,9 @@ const Dashboard = () => {
             { book: 'To Kill a Mockingbird', author: 'Harper Lee', isbn: '978-0061120084' },
             { book: 'Brave New World', author: 'Aldous Huxley', isbn: '978-0060850524' },
           ];
-          
+  const { selectedBooks } = useCart();
+  console.log(selectedBooks);
+  
 
   return (
     <div className='calibrate-layout'>
@@ -29,7 +32,7 @@ const Dashboard = () => {
         <Divider />
         {/* Create a FlexBox and align the cards by columns */}
         <Box
-      sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '15px', }}
+      sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1px', }}
     >
       {cardsData.map((card, index) => (
         <CustomCard key={index} text={card.text} value={card.value} />
@@ -42,15 +45,13 @@ const Dashboard = () => {
     <br />
 
     <Box
-        sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}
+        sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0px', flexWrap: 'wrap' }}
         >
         {booksData.map((book, index) => (
             <BookCard key={index} book={book.book} author={book.author} isbn={book.isbn} />
         ))}
         </Box>
     
-
-       
     </div>
   )
 }

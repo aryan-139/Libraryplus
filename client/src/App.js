@@ -6,6 +6,7 @@ import Checkout from './pages/Checkout';
 import Navbar from './components/Navbar';
 import CustomDrawer from './components/Drawer';
 import CheckoutPanel from './components/CheckoutPanel';
+import { CartProvider } from './states/CardContext';
 
 const App = ({ view }) => {
   let content;
@@ -33,10 +34,12 @@ const App = ({ view }) => {
 
   return(
     <div>
+      <CartProvider>
       <Navbar />
       <CustomDrawer />
       {content}
       <CheckoutPanel />
+      </CartProvider>
     </div>
   )
 };
