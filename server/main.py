@@ -51,7 +51,4 @@ def get_books():
     return libraries
 
 
-# Current book count
-@app.get("/books/count")
-def get_books_count():
-    return len(libraries)
+
