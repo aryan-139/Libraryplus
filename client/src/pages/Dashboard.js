@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import CustomCard from '../components/DashboardCard'
 import BookCard from '../components/BookCard';
@@ -23,11 +23,11 @@ const Dashboard = () => {
   useEffect(() => {
     async function fetchBooks() {
       try {
-        const response = await fetch('http://localhost:8001/books'); // Replace with your API endpoint
+        const response = await fetch('http://localhost:8001/books'); 
         if (response.ok) {
           const data = await response.json();
           setBooksData(data);
-          //console.log(data);
+          //console.log(data.message.num_pages);
         } else {
           console.error('Failed to fetch books data');
         }
@@ -75,6 +75,8 @@ const Dashboard = () => {
       book={book.title}
       author={book.authors}
       isbn={book.isbn}
+      num_pages={book.num_pages}
+      average_rating={book.average_rating}
     />
   ))}
 
