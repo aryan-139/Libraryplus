@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { handleSearchSubmit } from '../utils/handleSearchSubmit';
 
-const Navbar = () => {
+const Navbar = ({ setSearchQuery }) => {
     const [search, setSearch] = React.useState('');
     
     const handleSearch = (event) => {
@@ -17,7 +17,8 @@ const Navbar = () => {
     //send the search param here
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleSearchSubmit(search); 
+        setSearchQuery(search);
+        //handleSearchSubmit(search); 
       };
     
   return (

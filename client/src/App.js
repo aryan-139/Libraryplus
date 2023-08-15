@@ -10,11 +10,12 @@ import { CartProvider } from './states/CardContext';
 
 const App = ({ view }) => {
   let content;
+  const [searchQuery, setSearchQuery] = useState('');
 
   //change the component based on the view prop
   switch (view) {
     case 'dashboard':
-      content = <Dashboard />;
+      content = <Dashboard searchQuery={searchQuery}/>;
       break;
     case 'summary':
       content = <Summary/>;
@@ -35,7 +36,7 @@ const App = ({ view }) => {
   return(
     <div>
       <CartProvider>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
       <CustomDrawer />
       {content}
       <CheckoutPanel />

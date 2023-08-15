@@ -10,7 +10,6 @@ import BookDetailsModal from './BookDetailsModal';
 const BookCard = ({ book, author, isbn, num_pages ,average_rating }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const MAX_TEXT_LENGTH = 30; // Maximum text length before truncating
-  console.log(num_pages);
   // Function to truncate text if it's too long
   const truncateText = (text) => {
     if (text.length > MAX_TEXT_LENGTH) {
@@ -25,12 +24,10 @@ const BookCard = ({ book, author, isbn, num_pages ,average_rating }) => {
   return (
     <Card
       sx={{
+        maxWidth: 300,
         border: '1px solid #28358C',
         borderRadius: '12px',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-        width: "21%", // Set a fixed width for each card
-        height: "18%", // Set a fixed height for each card
-        maxWidth: 300,
         margin: '20px',
         textAlign: 'center',
         overflow: 'hidden',
@@ -56,7 +53,7 @@ const BookCard = ({ book, author, isbn, num_pages ,average_rating }) => {
         {/**The learn more modal */}
         <Button
           variant="outlined"
-          sx={{ marginTop: '10px' }}
+          sx={{ marginTop: '10px', marginLeft:"5px" }}
           onClick={() => setIsModalOpen(true)} // Open the modal on button click
         >
           Learn More
