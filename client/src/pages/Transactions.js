@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Typography } from '@mui/material';
+import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   // Placeholder data
   const sampleData = [
@@ -48,9 +49,37 @@ const Transactions = () => {
         <Typography variant='h6'>Transactions</Typography>
       </div>
       <div style={{ height: 400, width: '100%' }}>
-        <DataGrid rows={transactions} columns={columns} pageSize={5} />
+        <DataGrid
+          rows={transactions}
+          columns={columns}
+          pageSize={5}
+          onCellClick={(params, event) => {
+            if (params.field !== '__check__') {
+              setSelectedRow(params.row);
+            }
+          }}
+        />
       </div>
+      {selectedRow && <TransactionModal open={selectedRow !== null} data={selectedRow} onClose={() => setSelectedRow(null)} />}
     </div>
+  );
+};
+
+const TransactionModal = ({ open, data, onClose }) => {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Transaction Details</DialogTitle>
+      <DialogContent>
+        {/* Render the transaction details */}
+        <Typography>Entry Number: {data.entryNumber}</Typography>
+        {/* Add other fields here */}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color='primary'>
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
