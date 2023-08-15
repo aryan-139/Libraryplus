@@ -8,10 +8,17 @@ import CustomDrawer from './components/Drawer';
 import CheckoutPanel from './components/CheckoutPanel';
 import { CartProvider } from './states/CardContext';
 import Transactions from './pages/Transactions';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { lightTheme, darkTheme } from './theme/Theme'; // Import lightTheme and darkTheme
 
 const App = ({ view }) => {
   let content;
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentTheme, setCurrentTheme] = useState('light'); // Theme state
+
+  const toggleTheme = () => {
+    setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light');
+  };
 
   //change the component based on the view prop
   switch (view) {
@@ -29,22 +36,24 @@ const App = ({ view }) => {
       break;
     case 'help':
       content = <Checkout />;
-          break;
+      break;
     default:
       content = <Dashboard />;
   }
 
-  return(
+  return (
     <div>
       <CartProvider>
-      <Navbar setSearchQuery={setSearchQuery} />
-      <CustomDrawer />
-      {content}
-      <CheckoutPanel />
+        <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
+          <CssBaseline />
+          <Navbar setSearchQuery={setSearchQuery} toggleTheme={toggleTheme} currentTheme={currentTheme} />
+          <CustomDrawer />
+          {content}
+          <CheckoutPanel />
+        </ThemeProvider>
       </CartProvider>
     </div>
-  )
+  );
 };
-
 
 export default App;

@@ -15,7 +15,7 @@ const OrderSummary = () => {
     };
 
     return (
-      <Paper sx={{ background: '#f5f5f5', padding: '16px', marginTop: '16px' }}>
+      <Paper sx={{  padding: '16px', marginTop: '16px' }}>
         <Typography variant="h6" sx={{ textAlign: 'left', marginBottom: '10px' }}>
           Order Summary
         </Typography>

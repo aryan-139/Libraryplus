@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -43,6 +42,5 @@
   margin-left: calc(1.5% + 285px); 
   height: 100vh;
   margin-top: 5%;
-  background-color: whitesmoke;
   margin-right: 340px;
 }
