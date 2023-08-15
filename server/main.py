@@ -3,6 +3,7 @@ import requests
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from pymysql import connect
 
 app = FastAPI()
 
@@ -29,6 +30,45 @@ if __name__ == "__main__":
         port=8001,  # Change the port number to 8001
         reload=True,
     )
+
+# MySQL database configuration
+db_config = {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "password",
+    "database": "library",
+}
+
+# Create a connection to the database
+connection = connect(**db_config)
+
+
+@app.on_event("shutdown")  # Handle connection closing during shutdown
+async def shutdown_event():
+    connection.close()
+
+
+@app.get("/columns/{column_name}")
+def get_column_elements(column_name: str):
+    try:
+        # Create a cursor to execute SQL queries
+        with connection.cursor() as cursor:
+            # Replace "your_table" with the actual table name in your database
+            table_name = "logbook"
+
+            # Construct the SELECT query
+            query = f"SELECT {column_name} FROM {table_name}"
+            cursor.execute(query)
+
+            # Fetch all the results
+            results = cursor.fetchall()
+
+            # Extract the elements from the column and return as a list
+            column_elements = [row[column_name] for row in results]
+            return column_elements
+    except Exception as e:
+        return {"error": str(e)}
 
 
 # Getting all the books from the API and returning them as a JSON
