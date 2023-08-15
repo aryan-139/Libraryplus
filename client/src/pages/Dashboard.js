@@ -2,7 +2,6 @@ import { Box, Divider, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import CustomCard from '../components/DashboardCard';
 import BookCard from '../components/BookCard';
-//import { useCart } from '../states/CardContext';
 
 const Dashboard = ({ searchQuery }) => {
   const cardsData = [
@@ -13,7 +12,6 @@ const Dashboard = ({ searchQuery }) => {
     { text: 'Total Books Lended', value: '5' },
   ];
 
-  //const { selectedBooks } = useCart();
   const [booksData, setBooksData] = useState([]); // State to hold the fetched books data
   const [filteredBooks, setFilteredBooks] = useState([]); // State to hold filtered books
 
@@ -23,9 +21,7 @@ const Dashboard = ({ searchQuery }) => {
         const response = await fetch('http://localhost:8001/books');
         if (response.ok) {
           const data = await response.json();
-          // Print out the data received from the API to verify its structure
-          console.log(data);
-          setBooksData(data.message);
+          setBooksData(data.message); // Fix this line
           setFilteredBooks(data.message); // Initialize filteredBooks with all books
         } else {
           console.error('Failed to fetch books data');
