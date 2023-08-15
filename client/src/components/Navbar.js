@@ -12,17 +12,14 @@ const Navbar = ({ setSearchQuery, toggleTheme, currentTheme }) => {
   const [search, setSearch] = useState('');
 
   const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setSearchQuery(search);
+    const searchText = event.target.value;
+    setSearch(searchText);
+    setSearchQuery(searchText); // Update search query immediately
   };
 
   const navbarStyles = {
-    backgroundColor: currentTheme === 'light' ? 'white' : '#333', // Customize background color
-    color: currentTheme === 'light' ? 'black' : 'white', // Customize text color
+    backgroundColor: currentTheme === 'light' ? 'white' : '#333',
+    color: currentTheme === 'light' ? 'black' : 'white',
     boxShadow: '3.5%',
   };
 
@@ -35,20 +32,18 @@ const Navbar = ({ setSearchQuery, toggleTheme, currentTheme }) => {
         <Typography variant="h6" component={Link} to="/" sx={{ flexGrow: 1, textDecoration: 'none' }}>
           LibraryPlus
         </Typography>
-        <form onSubmit={handleSubmit}>
-          <div sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-            <InputBase
-              placeholder="Search by books, author name, or ISBN"
-              inputProps={{ 'aria-label': 'search' }}
-              value={search}
-              onChange={handleSearch}
-              sx={{ ml: 1, width: '500px' }}
-            />
-          </div>
-        </form>
+        <div sx={{ display: 'flex', alignItems: 'center' }}>
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+          <InputBase
+            placeholder="Search by books, author name, or ISBN"
+            inputProps={{ 'aria-label': 'search' }}
+            value={search}
+            onChange={handleSearch} // Update search query as user types
+            sx={{ ml: 1, width: '500px' }}
+          />
+        </div>
       </Toolbar>
     </AppBar>
   );
