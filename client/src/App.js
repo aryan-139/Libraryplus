@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import CustomDrawer from './components/Drawer';
 import CheckoutPanel from './components/CheckoutPanel';
 import { CartProvider } from './states/CardContext';
+import Transactions from './pages/Transactions';
 
 const App = ({ view }) => {
   let content;
@@ -24,7 +25,7 @@ const App = ({ view }) => {
       content = <Checkout />;
       break;
     case 'transactions':
-      content = <Checkout />;
+      content = <Transactions/>;
       break;
     case 'help':
       content = <Checkout />;

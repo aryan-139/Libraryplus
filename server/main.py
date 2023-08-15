@@ -49,6 +49,3 @@ libraries = get_libraries()
 @app.get("/books")
 def get_books():
     return libraries
-
-
-
