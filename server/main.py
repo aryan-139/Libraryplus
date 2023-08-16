@@ -111,4 +111,4 @@ class FormData(BaseModel):
 @app.post("/submit")
 def submit_form(data: FormData):
     print(data)
-    return {"message": guava}
+    return {"message": "Form submitted successfully"}

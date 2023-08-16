@@ -26,8 +26,8 @@ const CheckoutPage = () => {
         contact: contact,
         branch: branch,
         billingAmount: 80,
-        selectedBooks: selectedBooks,
-        returnTime: null,
+        books: selectedBooks,
+        returnTime: "Not Returned",
     };
 
     console.log(formData)
