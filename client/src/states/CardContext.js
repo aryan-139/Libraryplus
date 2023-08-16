@@ -21,7 +21,7 @@ const removeFromCart = (bookToRemove) => {
 const totalCheckoutAmount=selectedBooks.length*80+  0.05 * (selectedBooks.length*80)+ 0.02 * (selectedBooks.length*80);
 
   return (
-    <CartContext.Provider value={{ selectedBooks, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ selectedBooks, addToCart, removeFromCart, totalCheckoutAmount }}>
       {children}
     </CartContext.Provider>
   );

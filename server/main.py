@@ -3,7 +3,7 @@ import requests
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from pymysql import connect
+from pymysql import connect, OperationalError
 
 
 app = FastAPI()
@@ -21,17 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Set the configuration for the ASGI server
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(
-        "main:app",  # Replace with the name of your module
-        host="0.0.0.0",
-        port=8001,  # Change the port number to 8001
-        reload=True,
-    )
-
 # MySQL database configuration
 db_config = {
     "host": "localhost",
@@ -41,13 +30,25 @@ db_config = {
     "database": "library",
 }
 
+
+# Function to handle connection to the database
+def get_db_connection():
+    try:
+        connection = connect(**db_config)
+        return connection
+    except OperationalError as e:
+        print("Error connecting to the database:", e)
+        return None
+
+
 # Create a connection to the database
-connection = connect(**db_config)
+connection = get_db_connection()
 
 
 @app.on_event("shutdown")  # Handle connection closing during shutdown
 async def shutdown_event():
-    connection.close()
+    if connection:
+        connection.close()
 
 
 # testing by trying to get all the column values
@@ -71,9 +72,6 @@ def get_column_elements(column_name: str):
             return column_elements
     except Exception as e:
         return {"error": str(e)}
-
-
-# sending data to update database
 
 
 # Getting all the books from the API and returning them as a JSON
@@ -103,12 +101,42 @@ class FormData(BaseModel):
     email: str
     contact: str
     branch: str
-    billingAmount: int
+    billingAmount: float
     books: list
     returnTime: str
 
 
 @app.post("/submit")
 def submit_form(data: FormData):
-    print(data)
-    return {"message": "Form submitted successfully"}
+    try:
+        # Get a new connection in case the previous one is closed
+        connection = get_db_connection()
+        if not connection:
+            return {"error": "Database connection unavailable"}
+
+        with connection.cursor() as cursor:
+            insert_query = """
+                INSERT INTO logbook 
+                (time_borrowed, full_name, roll_number, email, phone_number, branch, billing_amount, books, time_returned) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+
+            values = (
+                data.timeBorrowed,
+                data.fullName,
+                data.rollNumber,
+                data.email,
+                data.contact,
+                data.branch,
+                data.billingAmount,
+                str(data.books),
+                data.returnTime,
+            )
+
+            cursor.execute(insert_query, values)
+            connection.commit()
+
+        return {"message": "Form submitted successfully"}
+    except Exception as e:
+        print("Error:", e)
+        return {"error": str(e)}

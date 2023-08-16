@@ -5,7 +5,7 @@ import { useCart } from '../states/CardContext';
 import OrderSummary from '../components/OrderSummary';
 
 const CheckoutPage = () => {
-  const { selectedBooks } = useCart();
+  const { selectedBooks, totalCheckoutAmount } = useCart();
 
   // State variables for form fields
   const [firstName, setFirstName] = useState('');
@@ -19,13 +19,13 @@ const CheckoutPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
-        timeBorrowed: new Date(),
+        timeBorrowed: new Date().toLocaleString(),
         fullName: firstName + ' ' + lastName,
         rollNumber: rollNumber,
         email: email,
         contact: contact,
         branch: branch,
-        billingAmount: 80,
+        billingAmount: totalCheckoutAmount,
         books: selectedBooks,
         returnTime: "Not Returned",
     };
