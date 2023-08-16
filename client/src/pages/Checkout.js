@@ -19,19 +19,21 @@ const CheckoutPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
+        timeBorrowed: new Date(),
         fullName: firstName + ' ' + lastName,
         rollNumber: rollNumber,
         email: email,
         contact: contact,
         branch: branch,
         billingAmount: 80,
+        selectedBooks: selectedBooks,
+        returnTime: null,
     };
 
     console.log(formData)
 
     try {
         const response = await axios.post("http://0.0.0.0:8001/submit", formData);
-        
         if (response.status === 200) {
             console.log("Success");
         } else {

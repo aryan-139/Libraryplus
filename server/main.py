@@ -97,15 +97,18 @@ def get_books():
 
 
 class FormData(BaseModel):
+    timeBorrowed: str
     fullName: str
     rollNumber: str
     email: str
     contact: str
     branch: str
     billingAmount: int
+    books: list
+    returnTime: str
 
 
 @app.post("/submit")
 def submit_form(data: FormData):
     print(data)
-    return {"message": "Form submitted successfully"}
+    return {"message": guava}
