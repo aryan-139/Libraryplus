@@ -49,6 +49,7 @@ async def shutdown_event():
     connection.close()
 
 
+# testing by trying to get all the column values
 @app.get("/columns/{column_name}")
 def get_column_elements(column_name: str):
     try:
@@ -69,6 +70,9 @@ def get_column_elements(column_name: str):
             return column_elements
     except Exception as e:
         return {"error": str(e)}
+
+
+# sending data to update database
 
 
 # Getting all the books from the API and returning them as a JSON
