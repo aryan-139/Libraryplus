@@ -3,12 +3,11 @@ import React from 'react'
 import { useCart } from '../states/CardContext';
 
 const OrderSummary = () => {
-    const { selectedBooks, totalCheckoutAmount } = useCart();
+    const { selectedBooks } = useCart();
     const orderRent = selectedBooks.length * 80;
     const tax = 0.05 * orderRent;
     const convenienceFee = 0.02 * orderRent;
     const totalPayable = orderRent + tax + convenienceFee;
-    console.log(totalCheckoutAmount);
     
     const formatAmount = (amount) => {
       return amount.toFixed(2); // Formats amount to two decimal places

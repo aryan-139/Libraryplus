@@ -50,7 +50,6 @@ const Dashboard = ({ searchQuery }) => {
     });
 
     setFilteredBooks(filtered);
-    console.log(filtered);
   }, [searchQuery, booksData]);
 
   return (

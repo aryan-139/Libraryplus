@@ -9,6 +9,8 @@ import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/mater
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import TransactionsIcon from '@mui/icons-material/AccountBalanceWallet';
 import HelpIcon from '@mui/icons-material/Help';
+import ReturnBookIcon from '@mui/icons-material/ArrowBack';
+import RentFinesIcon from '@mui/icons-material/Money';
 
 const drawerWidth = 290;
 
@@ -40,30 +42,52 @@ const CustomDrawer = () => {
         open
       >
         <List sx={{ color: 'white' }}>
+          {/**Dashboard ListItems */}
           <ListItem disablePadding>
             <ListItemButton component={Link} to="/" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
-              <ListItemIcon sx={{color:"white"}}>
+              <ListItemIcon sx={{ color: 'white' }}>
                 <DashboardIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
               <ListItemText primary="Dashboard" sx={{ color: 'inherit' }} />
             </ListItemButton>
           </ListItem>
+          {/**Transactions ListItems */}
           <ListItem disablePadding>
             <ListItemButton component={Link} to="/transactions" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
-              <ListItemIcon sx={{color:"white"}}>
+              <ListItemIcon sx={{ color: 'white' }}>
                 <TransactionsIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
               <ListItemText primary="Transactions" sx={{ color: 'inherit' }} />
             </ListItemButton>
           </ListItem>
+          {/**Return Book ListItems */}
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/help" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
-              <ListItemIcon sx={{color:"white"}}>
-                <HelpIcon sx={{ color: 'inherit' }} />
+            <ListItemButton component={Link} to="/return-book" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+              <ListItemIcon sx={{ color: 'white' }}>
+                <ReturnBookIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
-              <ListItemText primary="Help" sx={{ color: 'inherit' }} />
+              <ListItemText primary="Return Book" sx={{ color: 'inherit' }} />
             </ListItemButton>
           </ListItem>
+          {/**Rent/Fines ListItems */}
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/rent-fines" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+              <ListItemIcon sx={{ color: 'white' }}>
+                <RentFinesIcon sx={{ color: 'inherit' }} />
+              </ListItemIcon>
+              <ListItemText primary="Rent/Fines" sx={{ color: 'inherit' }} />
+            </ListItemButton>
+          </ListItem>
+          {/**Help ListItems */}
+          <ListItem disablePadding>
+          <ListItemButton component={Link} to="/help" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+            <ListItemIcon sx={{ color: 'white' }}>
+              <HelpIcon sx={{ color: 'inherit' }} />
+            </ListItemIcon>
+            <ListItemText primary="Help" sx={{ color: 'inherit' }} />
+          </ListItemButton>
+        </ListItem>
+        
         </List>
       </Drawer>
     </Box>

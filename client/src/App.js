@@ -10,6 +10,7 @@ import { CartProvider } from './states/CardContext';
 import Transactions from './pages/Transactions';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { lightTheme, darkTheme } from './theme/Theme'; // Import lightTheme and darkTheme
+import TransactionComplete from './pages/TransactionComplete';
 
 const App = ({ view }) => {
   let content;
@@ -37,6 +38,9 @@ const App = ({ view }) => {
     case 'help':
       content = <Checkout />;
       break;
+    case 'paid':
+      content=<TransactionComplete/>
+      break;
     default:
       content = <Dashboard />;
   }
@@ -49,7 +53,8 @@ const App = ({ view }) => {
           <Navbar setSearchQuery={setSearchQuery} toggleTheme={toggleTheme} currentTheme={currentTheme} />
           <CustomDrawer />
           {content}
-          <CheckoutPanel />
+          {/**can change when to show checkout panel and when to not show it */}
+          {(view === 'checkout' || view === 'dashboard') && <CheckoutPanel view={view} />}
         </ThemeProvider>
       </CartProvider>
     </div>

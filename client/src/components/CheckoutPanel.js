@@ -19,7 +19,7 @@ const RightAlignedDrawer = styled(Drawer)(({ theme }) => ({
   },
 }));
 
-const CheckoutPanel = () => {
+const CheckoutPanel = ({view}) => {
   const { selectedBooks, removeFromCart } = useCart();
   const [message, setMessage]=useState('');
   const navigate=useNavigate();
@@ -96,7 +96,7 @@ const CheckoutPanel = () => {
       <OrderSummary />
       <br />
 
-      <Button onClick={handleSubmitOrder} variant="contained" sx={{backgroundColor: '#1F2348',color: 'white',borderRadius: '30px',marginLeft: 'auto',marginRight: 'auto', padding: '10px 20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', transition: 'background-color 0.3s','&:hover': {  backgroundColor: '#28358C',},
+      <Button onClick={handleSubmitOrder} variant="contained" sx={{display: view !== 'checkout' ? 'block' : 'none', backgroundColor: '#1F2348',color: 'white',borderRadius: '30px',marginLeft: 'auto',marginRight: 'auto', padding: '10px 20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', transition: 'background-color 0.3s','&:hover': {  backgroundColor: '#28358C',},
         }}
       >
       Submit Order
