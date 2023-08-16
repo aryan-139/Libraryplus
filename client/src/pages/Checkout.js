@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Typography, Grid, TextField, Button, Divider } from '@mui/material';
-
+import axios from 'axios';
 import { useCart } from '../states/CardContext';
 import OrderSummary from '../components/OrderSummary';
 
@@ -16,11 +16,31 @@ const CheckoutPage = () => {
   const[contact,setContact]=useState('');
   const[email,setEmail]=useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // You can handle the form submission here
-    // For example, send the form data to the backend
-  };
+    const formData = {
+        fullName: firstName + ' ' + lastName,
+        rollNumber: rollNumber,
+        email: email,
+        contact: contact,
+        branch: branch,
+        billingAmount: 80,
+    };
+
+    console.log(formData)
+
+    try {
+        const response = await axios.post("http://0.0.0.0:8001/submit", formData);
+        
+        if (response.status === 200) {
+            console.log("Success");
+        } else {
+            console.log("Error", response.status);
+        }
+    } catch (error) {
+        console.log("Error", error);
+    }
+};
 
   return (
     <div className='calibrate-layout'>
@@ -34,7 +54,7 @@ const CheckoutPage = () => {
       <Divider />
       <br />
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}> {/* Half width for medium screens */}
+        <Grid item xs={12} md={6}> 
           <TextField
             label="First Name"
             fullWidth
@@ -43,7 +63,7 @@ const CheckoutPage = () => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}> {/* Half width for medium screens */}
+        <Grid item xs={12} md={6}> 
           <TextField
             label="Last Name"
             fullWidth
@@ -52,7 +72,7 @@ const CheckoutPage = () => {
             onChange={(e) => setLastName(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12}> {/* Missing closing tag here */}
+        <Grid item xs={12}> 
           <TextField
             label="Roll Number (Enter in IMH/100XX/XX format)"
             fullWidth
@@ -62,7 +82,7 @@ const CheckoutPage = () => {
           />
         </Grid>
 
-        <Grid item xs={12}> {/* Missing closing tag here */}
+        <Grid item xs={12}> 
           <TextField
             label="Email Address"
             fullWidth
@@ -71,7 +91,7 @@ const CheckoutPage = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12}> {/* Missing closing tag here */}
+        <Grid item xs={12}> 
           <TextField
             label="Contact Number"
             fullWidth
@@ -95,6 +115,8 @@ const CheckoutPage = () => {
         </Grid>
       </Grid>
       <br />
+      <OrderSummary books={selectedBooks} />
+      <br/>
       <Button onClick={handleSubmit} variant="contained" sx={{backgroundColor: '#1F2348',color: 'white',borderRadius: '30px',marginLeft: 'auto', padding: '10px 20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', transition: 'background-color 0.3s','&:hover': {  backgroundColor: '#28358C',},
         }}
       >

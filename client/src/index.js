@@ -14,6 +14,7 @@ root.render(
         <Route path="/checkout" element={<App view="checkout" />} /> {/* Route for checkout */}
         <Route path="/transactions" element={<App view="transactions" />} />
         <Route path="/help" element={<App view="help" />} />
+        <Route path="/paymentsuccessful" element={<App view="paid" />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

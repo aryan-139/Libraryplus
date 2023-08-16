@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from pymysql import connect
 
+
 app = FastAPI()
 
 origins = [
@@ -93,3 +94,18 @@ libraries = get_libraries()
 @app.get("/books")
 def get_books():
     return libraries
+
+
+class FormData(BaseModel):
+    fullName: str
+    rollNumber: str
+    email: str
+    contact: str
+    branch: str
+    billingAmount: int
+
+
+@app.post("/submit")
+def submit_form(data: FormData):
+    print(data)
+    return {"message": "Form submitted successfully"}

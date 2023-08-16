@@ -8,7 +8,6 @@ const OrderSummary = () => {
     const tax = 0.05 * orderRent;
     const convenienceFee = 0.02 * orderRent;
     const totalPayable = orderRent + tax + convenienceFee;
-    console.log(totalCheckoutAmount);
     
     const formatAmount = (amount) => {
       return amount.toFixed(2); // Formats amount to two decimal places
