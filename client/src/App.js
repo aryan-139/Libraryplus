@@ -11,6 +11,8 @@ import Transactions from './pages/Transactions';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { lightTheme, darkTheme } from './theme/Theme'; // Import lightTheme and darkTheme
 import TransactionComplete from './pages/TransactionComplete';
+import ReturnBook from './pages/ReturnBook';
+import Rent from './pages/Rent';
 
 const App = ({ view }) => {
   let content;
@@ -40,6 +42,12 @@ const App = ({ view }) => {
       break;
     case 'paid':
       content=<TransactionComplete/>
+      break;
+    case 'return':
+      content=<ReturnBook/>
+      break;
+    case 'rent':
+      content=<Rent/>
       break;
     default:
       content = <Dashboard />;
