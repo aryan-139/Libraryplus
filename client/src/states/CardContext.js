@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 const CartContext = createContext();
 
@@ -8,9 +9,22 @@ export const CartProvider = ({ children }) => {
   const [cartData, setCartData] = useState({});
 
 //add to cart
-  const addToCart = (book) => {
-    setSelectedBooks([...selectedBooks, book]);
-  };
+const addToCart = (book) => {
+  const updatedSelectedBooks = [...selectedBooks, book];
+  setSelectedBooks(updatedSelectedBooks);
+
+  // Remove individual book properties before sending to the backend
+  const booksToSend = updatedSelectedBooks.map(({ book, author, isbn }) => ({ book, author, isbn }));
+
+  // Send selected books to the backend API
+  axios.post('http://localhost:8001/store_selected_books', booksToSend) // Replace with your API endpoint
+    .then(response => {
+      console.log(response.data.message);
+    })
+    .catch(error => {
+      console.error('Error storing selected books:', error);
+    });
+};
 
 //remove from cart
 const removeFromCart = (bookToRemove) => {

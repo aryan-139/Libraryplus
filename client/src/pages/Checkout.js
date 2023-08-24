@@ -15,7 +15,27 @@ const CheckoutPage = () => {
   const [branch, setBranch] = useState('');
   const[contact,setContact]=useState('');
   const[email,setEmail]=useState('');
+  const [storedBooks, setStoredBooks] = useState([]);
+  // Fetch stored books from the backend
+  const fetchStoredBooks = async () => {
+    try {
+      const response = await axios.get('http://localhost:8001/get_stored_books'); // Replace with your API endpoint
+      setStoredBooks(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching stored books:', error);
+    }
+  };
 
+  // Fetch stored books when the component mounts
+  React.useEffect(() => {
+    fetchStoredBooks();
+  }, []);
+
+  OrderSummary.defaultProps = {
+    storedBooks: [] // Default empty array if the prop is not provided
+  };
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
@@ -120,7 +140,7 @@ const CheckoutPage = () => {
         </Grid>
       </Grid>
       <br />
-      <OrderSummary books={selectedBooks} />
+      <OrderSummary books={storedBooks} />
       <br/>
       <Button onClick={handleSubmit} variant="contained" sx={{backgroundColor: '#1F2348',color: 'white',borderRadius: '30px',marginLeft: 'auto', padding: '10px 20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', transition: 'background-color 0.3s','&:hover': {  backgroundColor: '#28358C',},
         }}

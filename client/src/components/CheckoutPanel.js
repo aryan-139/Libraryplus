@@ -43,7 +43,7 @@ const CheckoutPanel = ({view}) => {
       setMessage(tempMessage);
     }
     else{
-      window.location.href = "/checkout";
+      navigate ('/checkout');
     }
   };
 
@@ -93,7 +93,7 @@ const CheckoutPanel = ({view}) => {
 
       <Divider />
       
-      <OrderSummary />
+      <OrderSummary books={selectedBooks} />
       <br />
 
       <Button onClick={handleSubmitOrder} variant="contained" sx={{display: view !== 'checkout' ? 'block' : 'none', backgroundColor: '#1F2348',color: 'white',borderRadius: '30px',marginLeft: 'auto',marginRight: 'auto', padding: '10px 20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', transition: 'background-color 0.3s','&:hover': {  backgroundColor: '#28358C',},

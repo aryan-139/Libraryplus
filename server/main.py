@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from pymysql import connect, OperationalError
-
+from typing import List, Dict
 
 app = FastAPI()
 
@@ -140,3 +140,46 @@ def submit_form(data: FormData):
     except Exception as e:
         print("Error:", e)
         return {"error": str(e)}
+
+
+@app.get("/issue-return/{book_id}")
+def issue_return(book_id: int):
+    print("Book ID:", book_id)
+    return 10
+    # connection = get_db_connection()
+    # if not connection:
+    #     return {"error": "Database connection unavailable"}
+    # with connection.cursor() as cursor:
+    #     query = f"SELECT time_borrowed FROM logbook WHERE entry_number={book_id}"
+    #     cursor.execute(query)
+    #     result = cursor.fetchone()
+
+    # if result:
+    #     time_borrowed = result["time_borrowed"]
+    #     time_borrowed_datetime = datetime.strptime(time_borrowed, "%Y-%m-%d %H:%M:%S")
+
+    #     current_time = datetime.now()
+    #     time_difference = current_time - time_borrowed_datetime
+
+    #     days_diff = time_difference.days  # Get the difference in days
+
+    #     return days_diff
+    # else:
+    #     raise HTTPException(status_code=404, detail="Book entry not found")
+
+
+selected_books = []
+
+
+@app.post("/store_selected_books")
+async def store_selected_books(books: List[Dict[str, str]]):
+    global selected_books
+    selected_books = books
+    print("Selected books:", selected_books)
+    return selected_books
+
+
+@app.get("/get_stored_books")
+async def get_stored_books():
+    global selected_books
+    return selected_books
