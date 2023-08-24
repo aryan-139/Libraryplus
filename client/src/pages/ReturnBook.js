@@ -12,22 +12,29 @@ import axios from 'axios';
 //return book api hitting and receiving the integer value of days borrowed
 const ReturnBook = () => {
   const [entryNumber, setEntryNumber] = useState('');
+  const [message, setMessage] = useState(''); // Add a message state
   const [daysBorrowed, setDaysBorrowed] = useState(null);
 
   const handleReturnSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.get(`http://0.0.0.0:8001/issue-return/${entryNumber}`)
-      const data = response.data;
-      const daysDiff = data;
-      console.log(daysDiff);
+      const response = await axios.get(`http://0.0.0.0:8001/issue-return/${entryNumber}`);
+      const responseData = response.data;
       
-      setDaysBorrowed(daysDiff);
+      if (responseData.message) {
+        setMessage(responseData.message); // Update the message state
+      }
+
+      const updatedDaysBorrowed = responseData.daysBorrowed; // Assuming the response has a daysBorrowed field
+      console.log(updatedDaysBorrowed);
+      
+      setDaysBorrowed(updatedDaysBorrowed);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+  
 
   return (
     <Container maxWidth="md">
