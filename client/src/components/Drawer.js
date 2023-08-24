@@ -69,7 +69,7 @@ const CustomDrawer = () => {
               <ListItemText primary="Return Book" sx={{ color: 'inherit' }} />
             </ListItemButton>
           </ListItem>
-          {/**Rent/Fines ListItems */}
+          {/* *Rent/Fines ListItems
           <ListItem disablePadding>
             <ListItemButton component={Link} to="/setrent" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
               <ListItemIcon sx={{ color: 'white' }}>
@@ -79,14 +79,14 @@ const CustomDrawer = () => {
             </ListItemButton>
           </ListItem>
           {/**Help ListItems */}
-          <ListItem disablePadding>
+          {/* <ListItem disablePadding>
           <ListItemButton component={Link} to="/help" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
             <ListItemIcon sx={{ color: 'white' }}>
               <HelpIcon sx={{ color: 'inherit' }} />
             </ListItemIcon>
-            <ListItemText primary="Help" sx={{ color: 'inherit' }} />
-          </ListItemButton>
-        </ListItem>
+            <ListItemText primary="Help" sx={{ color: 'inherit' }} /> */}
+          {/* </ListItemButton> */} 
+        {/* </ListItem> */}
         
         </List>
       </Drawer>
