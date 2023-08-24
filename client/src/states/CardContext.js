@@ -5,6 +5,7 @@ const CartContext = createContext();
 //this will add the selected books to the cart
 export const CartProvider = ({ children }) => {
   const [selectedBooks, setSelectedBooks] = useState([]);
+  const [cartData, setCartData] = useState({});
 
 //add to cart
   const addToCart = (book) => {
@@ -21,7 +22,7 @@ const removeFromCart = (bookToRemove) => {
 const totalCheckoutAmount=selectedBooks.length*80+  0.05 * (selectedBooks.length*80)+ 0.02 * (selectedBooks.length*80);
 
   return (
-    <CartContext.Provider value={{ selectedBooks, addToCart, removeFromCart, totalCheckoutAmount }}>
+    <CartContext.Provider value={{ selectedBooks, addToCart, removeFromCart, totalCheckoutAmount, cartData, setCartData }}>
       {children}
     </CartContext.Provider>
   );

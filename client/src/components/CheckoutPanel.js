@@ -43,7 +43,7 @@ const CheckoutPanel = ({view}) => {
       setMessage(tempMessage);
     }
     else{
-      navigate('/checkout');
+      window.location.href = "/checkout";
     }
   };
 

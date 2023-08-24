@@ -62,7 +62,7 @@ const CustomDrawer = () => {
           </ListItem>
           {/**Return Book ListItems */}
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/return-book" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+            <ListItemButton component={Link} to="/return" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
               <ListItemIcon sx={{ color: 'white' }}>
                 <ReturnBookIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
@@ -71,7 +71,7 @@ const CustomDrawer = () => {
           </ListItem>
           {/**Rent/Fines ListItems */}
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/rent-fines" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+            <ListItemButton component={Link} to="/setrent" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
               <ListItemIcon sx={{ color: 'white' }}>
                 <RentFinesIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
