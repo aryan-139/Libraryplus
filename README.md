@@ -1,7 +1,7 @@
 # Libraryplus
 LibraryPlus is a Library Management System, which aims to fix the efficiency and organization issues faced by libraries. It is an admin based web application, which allows the admin to manage the library, and the users to access the library. One can issue books, return books, search for books, and view the library catalog.
 
-## Requirement Analysis Document
+### Requirement Analysis Document
 Requirement Analysis Document can be found here:
 https://docs.google.com/document/d/12StFkDvC7djz3iCKISOiuxJsVbNLqmLcX6xd3-h34RA/edit?addon_store
 
@@ -75,3 +75,23 @@ There is a single table implementation, using SQLAlchemy. The table is named `bo
 1. Goto cd server 
 2. Run command, `uvicorn main:app --host 0.0.0.0 --port 8001`
 3. This will run the server at port 8001, locally. 
+
+## Application Overview 
+
+Dashboard Page of Library Plus
+![Alt text](<Screenshot 2023-08-25 at 1.26.19 PM.png>)
+
+Error Handling when the user tries to borrow books worth Rs. 500 or more
+![Alt text](<Screenshot 2023-08-25 at 1.27.25 PM.png>)
+
+Dark Mode Support 
+![Alt text](<Screenshot 2023-08-25 at 1.28.18 PM.png>)
+
+Detailed and Intuitive Checkout Form 
+![Alt text](<Screenshot 2023-08-25 at 1.29.15 PM.png>)
+
+Detailed Transaction and Billing History
+![Alt text](<Screenshot 2023-08-25 at 1.30.31 PM.png>)
+
+Return Book Support 
+![Alt text](<Screenshot 2023-08-25 at 1.31.27 PM.png>)
