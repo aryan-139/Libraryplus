@@ -31,7 +31,7 @@ https://docs.google.com/document/d/12StFkDvC7djz3iCKISOiuxJsVbNLqmLcX6xd3-h34RA/
 - client - contains the frontend code
 - server - contains the backend code
 
-![Alt text](/assets/<Screenshot 2023-08-25 at 1.15.40 PM.png>)
+![Alt text](/assets/folder_structure.png)
 
 ## Tech Stack
 
@@ -50,7 +50,7 @@ https://docs.google.com/document/d/12StFkDvC7djz3iCKISOiuxJsVbNLqmLcX6xd3-h34RA/
 
 ## Database Schema
 
-![Alt text](<Screenshot 2023-08-25 at 1.20.24 PM.png>)
+![Alt text](/assets/database_schema.png)
 
 There is a single table implementation, using SQLAlchemy. The table is named `books`, and has the following columns:
 - entry_number (Primary Key)
@@ -79,19 +79,19 @@ There is a single table implementation, using SQLAlchemy. The table is named `bo
 ## Application Overview 
 
 Dashboard Page of Library Plus
-![Alt text](<Screenshot 2023-08-25 at 1.26.19 PM.png>)
+![Alt text](/assets/dashboard.png)
 
 Error Handling when the user tries to borrow books worth Rs. 500 or more
-![Alt text](<Screenshot 2023-08-25 at 1.27.25 PM.png>)
+![Alt text](/assets/extra_books_error.png)
 
 Dark Mode Support 
-![Alt text](<Screenshot 2023-08-25 at 1.28.18 PM.png>)
+![Alt text](/assets/dark_mode.png)
 
 Detailed and Intuitive Checkout Form 
-![Alt text](<Screenshot 2023-08-25 at 1.29.15 PM.png>)
+![Alt text](/assets/form.png)
 
 Detailed Transaction and Billing History
-![Alt text](<Screenshot 2023-08-25 at 1.30.31 PM.png>)
+![Alt text](/assets/transaction_table.png)
 
 Return Book Support 
-![Alt text](<Screenshot 2023-08-25 at 1.31.27 PM.png>)
+![Alt text](</assets/return_book.png>)
