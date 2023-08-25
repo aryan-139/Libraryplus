@@ -50,7 +50,7 @@ https://docs.google.com/document/d/12StFkDvC7djz3iCKISOiuxJsVbNLqmLcX6xd3-h34RA/
 
 ## Database Schema
 
-![Alt text](/assets/database_schema.png)
+![Alt text](/assets/db_schema.png)
 
 There is a single table implementation, using SQLAlchemy. The table is named `books`, and has the following columns:
 - entry_number (Primary Key)
