@@ -31,7 +31,7 @@ https://docs.google.com/document/d/12StFkDvC7djz3iCKISOiuxJsVbNLqmLcX6xd3-h34RA/
 - client - contains the frontend code
 - server - contains the backend code
 
-![Alt text](<Screenshot 2023-08-25 at 1.15.40 PM.png>)
+![Alt text](/assets/<Screenshot 2023-08-25 at 1.15.40 PM.png>)
 
 ## Tech Stack
 
