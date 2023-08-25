@@ -1,33 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import axios from 'axios'; // Import axios for API calls
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
 
-  // Placeholder data
-  const sampleData = [
-    {
-      id: 1,
-      entryNumber: '123',
-      dateBorrowed: '2023-08-15',
-      name: 'John Doe',
-      rollNumber: 'A123',
-      email: 'john@example.com',
-      contact: '1234567890',
-      branch: 'Computer Science',
-      books: 'Book 1, Book 2',
-      amount: '$50',
-      dateOfReturn: '2023-08-25',
-    },
-    // Add more sample data items here
-  ];
+  // Fetch data function
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://0.0.0.0:8001/transactions');
+      setTransactions(response.data);
+      console.log(response.data); // Add this line to see the received data
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
+  // Fetch data on component mount and then every 5 seconds
   useEffect(() => {
-    // Fetch data from backend API here
-    // For now, using sampleData as placeholder
-    setTransactions(sampleData);
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // Fetch data every 5 seconds
+    return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
 
   const columns = [

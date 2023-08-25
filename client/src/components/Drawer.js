@@ -62,16 +62,16 @@ const CustomDrawer = () => {
           </ListItem>
           {/**Return Book ListItems */}
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/return-book" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+            <ListItemButton component={Link} to="/return" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
               <ListItemIcon sx={{ color: 'white' }}>
                 <ReturnBookIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
               <ListItemText primary="Return Book" sx={{ color: 'inherit' }} />
             </ListItemButton>
           </ListItem>
-          {/**Rent/Fines ListItems */}
+          {/* *Rent/Fines ListItems
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/rent-fines" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
+            <ListItemButton component={Link} to="/setrent" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
               <ListItemIcon sx={{ color: 'white' }}>
                 <RentFinesIcon sx={{ color: 'inherit' }} />
               </ListItemIcon>
@@ -79,14 +79,14 @@ const CustomDrawer = () => {
             </ListItemButton>
           </ListItem>
           {/**Help ListItems */}
-          <ListItem disablePadding>
+          {/* <ListItem disablePadding>
           <ListItemButton component={Link} to="/help" sx={{ '&:hover': { backgroundColor: '#28358C' } }}>
             <ListItemIcon sx={{ color: 'white' }}>
               <HelpIcon sx={{ color: 'inherit' }} />
             </ListItemIcon>
-            <ListItemText primary="Help" sx={{ color: 'inherit' }} />
-          </ListItemButton>
-        </ListItem>
+            <ListItemText primary="Help" sx={{ color: 'inherit' }} /> */}
+          {/* </ListItemButton> */} 
+        {/* </ListItem> */}
         
         </List>
       </Drawer>

@@ -5,7 +5,7 @@ import { useCart } from '../states/CardContext';
 import OrderSummary from '../components/OrderSummary';
 
 const CheckoutPage = () => {
-  const { selectedBooks, totalCheckoutAmount } = useCart();
+  const { selectedBooks, totalCheckoutAmount, setCartData } = useCart();
 
   // State variables for form fields
   const [firstName, setFirstName] = useState('');
@@ -35,7 +35,10 @@ const CheckoutPage = () => {
     try {
         const response = await axios.post("http://0.0.0.0:8001/submit", formData);
         if (response.status === 200) {
-            console.log("Success");
+            console.log("Yay! Database Entry Success");
+            setCartData(formData);
+            console.log(formData);
+            window.location.href = "/paymentsuccessful";
         } else {
             console.log("Error", response.status);
         }

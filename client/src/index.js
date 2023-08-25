@@ -15,6 +15,8 @@ root.render(
         <Route path="/transactions" element={<App view="transactions" />} />
         <Route path="/help" element={<App view="help" />} />
         <Route path="/paymentsuccessful" element={<App view="paid" />} />
+        <Route path="/return" element={<App view="return" />} />
+        <Route path="/setrent" element={<App view="rent" />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

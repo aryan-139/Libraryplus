@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from pymysql import connect, OperationalError
+from datetime import datetime
 
 
 app = FastAPI()
@@ -57,7 +58,6 @@ def get_column_elements(column_name: str):
     try:
         # Create a cursor to execute SQL queries
         with connection.cursor() as cursor:
-            # Replace "your_table" with the actual table name in your database
             table_name = "logbook"
 
             # Construct the SELECT query
@@ -137,6 +137,127 @@ def submit_form(data: FormData):
             connection.commit()
 
         return {"message": "Form submitted successfully"}
+    except Exception as e:
+        print("Error:", e)
+        return {"error": str(e)}
+
+
+@app.get("/issue-return/{entry_number}")
+def issue_return(entry_number: int):
+    try:
+        # Create a connection to the database
+        connection = get_db_connection()
+        if not connection:
+            return {"error": "Database connection unavailable"}
+
+        with connection.cursor() as cursor:
+            select_query = """
+                SELECT time_borrowed, time_returned FROM logbook
+                WHERE entry_number = %s
+            """
+            cursor.execute(select_query, (entry_number,))
+            result = cursor.fetchone()
+
+            if (
+                result and result[1] == "Not Returned"
+            ):  # Use integer index 1 for time_returned
+                time_returned = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+                update_query = """
+                    UPDATE logbook
+                    SET time_returned = %s
+                    WHERE entry_number = %s
+                """
+                cursor.execute(update_query, (time_returned, entry_number))
+                connection.commit()
+
+                # Calculate days borrowed
+                time_borrowed = datetime.strptime(result[0], "%d/%m/%Y, %H:%M:%S")
+                return_datetime = datetime.strptime(time_returned, "%Y-%m-%d %H:%M:%S")
+                days_borrowed = (return_datetime - time_borrowed).days
+
+                # Update daysBorrowed in the response
+                response = {
+                    "message": "Book returned successfully",
+                    "daysBorrowed": days_borrowed,
+                }
+                return response
+            else:
+                return {"error": "Book not found or already returned"}
+
+    except Exception as e:
+        print("Error:", e)
+        return {"error": str(e)}
+
+
+from datetime import datetime
+
+
+@app.get("/transactions")
+def get_transactions():
+    try:
+        # Create a connection to the database
+        connection = get_db_connection()
+        if not connection:
+            return {"error": "Database connection unavailable"}
+
+        with connection.cursor() as cursor:
+            select_query = """
+                SELECT entry_number, time_borrowed, full_name, roll_number, email, phone_number, branch, books, billing_amount, time_returned
+                FROM logbook
+            """
+            cursor.execute(select_query)
+            results = cursor.fetchall()
+
+            # Transform the results into a list of dictionaries
+            transactions = []
+            for result in results:  # Change 'results' to 'result'
+                (
+                    entry_number,
+                    time_borrowed,
+                    full_name,
+                    roll_number,
+                    email,
+                    phone_number,
+                    branch,
+                    books,
+                    billing_amount,
+                    time_returned,
+                ) = result
+
+                # Inside the loop
+                try:
+                    borrowed_datetime = datetime.strptime(
+                        time_borrowed, "%d/%m/%Y, %H:%M:%S"
+                    )
+                    returned_datetime = datetime.strptime(
+                        time_returned, "%Y-%m-%d %H:%M:%S"
+                    )
+                except ValueError:
+                    borrowed_datetime = None
+                    returned_datetime = None
+
+                transaction = {
+                    "id": entry_number,
+                    "entryNumber": entry_number,
+                    "dateBorrowed": borrowed_datetime.strftime("%Y-%m-%d")
+                    if borrowed_datetime
+                    else "Not Borrowed",
+                    "name": full_name,
+                    "rollNumber": roll_number,
+                    "email": email,
+                    "contact": phone_number,
+                    "branch": branch,
+                    "books": books,
+                    "amount": billing_amount,
+                    "dateOfReturn": returned_datetime.strftime("%Y-%m-%d")
+                    if returned_datetime
+                    else "Not Returned",
+                }
+                transactions.append(transaction)
+
+            return transactions
+
     except Exception as e:
         print("Error:", e)
         return {"error": str(e)}
