@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 app = FastAPI()
-
+# added origins
 origins = [
     "http://localhost",
     "http://localhost:3000",
